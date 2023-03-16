@@ -24,5 +24,4 @@ server.on('disconnected', (err) => {
   process.exit(0);
 });
 
-
 module.exports.server = server;

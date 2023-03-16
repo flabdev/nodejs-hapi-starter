@@ -42,7 +42,6 @@ exports.init = async () => {
     security: [{ jwt: [] }],
   };
 
-
   await server.register([
     Inert,
     Vision,
@@ -68,4 +67,3 @@ exports.init = async () => {
     console.log(err);
   }
 };
-

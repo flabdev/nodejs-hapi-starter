@@ -4,9 +4,7 @@ const authController = require('../controllers/auth');
 const userJoiSchema = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
-  email: Joi.string()
-    .email()
-    .required(),
+  email: Joi.string().email().required(),
   password: Joi.string().required(),
 }).unknown();
 
@@ -34,9 +32,7 @@ module.exports = [
       auth: false,
       validate: {
         payload: Joi.object({
-          email: Joi.string()
-            .email()
-            .required(),
+          email: Joi.string().email().required(),
           password: Joi.string().required(),
         }),
       },

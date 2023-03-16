@@ -1,9 +1,25 @@
-# A starter project for Hapi.js application
+# A starter project for NodeJs-HapiJs-mongoDB.
 
-###  Run Locally on your machine
-* Clone the repo to your local machine.
-* Create .env file with the required values. 
-* Run the following commands in terminal:
+# Prerequisite
+
+- Nodejs 16 or above (https://nodejs.org/en/).
+- Any IDE. (VsCode).
+
+### Run Locally on your machine
+
+- Clone the repo to your local machine.
+
+- Create `.env` file in the root floder.
+
+```
+# Add
+HOST=localhost
+PORT=3000
+DATABASE=Database_URL
+```
+
+- Run the following commands in terminal:
+
 ```
 # install the dependencies
 npm install
@@ -12,23 +28,31 @@ npm install
 npm start
 ```
 
-- Once you create the file, you can start the application using `npm start`
+if you want to run in development
+
+```
+npm run dev
+```
 
 #### API Documentation
 
-- Swagger documentation can be accessed at `http://localhost:3000/documentation`
-
-#### Add `.env` in `.gitignore` file
+Swagger documentation can be accessed at `http://localhost:3000/documentation`
 
 #### ES-LINT configuration
+This Project uses : *ES-LINT*
 
-This project uses ESLint with Airbnb JS style-guide. 
+ESLint is a Javascript tool used for linting common errors and anti-patterns in your code. It is used by javascript devs all around the world.
 
-- To check the errors/warnings using ES-LINT:  **npx eslint .**
-- To fix the issues for all files (auto-correct options):    **npx eslint --fix .**
+```
+# check errors/warnings
+npm run lint-check
+
+# To fix the issues
+npm run lint
+```
+
 
 #### SonarQube configuration
 
 - SonarQube configuration added with ES-LINT.
-- SonarJS rules for ESLint to detect bugs and suspicious patterns in your code. i.e., Bug Detection , Code Smell Detection.
-
+- SonarQube is a Code Quality Assurance tool that collects and analyzes source code, and provides reports for the code quality of   your project.

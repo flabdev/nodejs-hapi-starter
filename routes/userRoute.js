@@ -4,16 +4,14 @@ const usersController = require('../controllers/userController');
 const userJoiSchema = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
-  email: Joi.string()
-    .email()
-    .required(),
+  email: Joi.string().email().required(),
   password: Joi.string().required(),
 }).unknown();
 
 module.exports = [
   {
     method: 'POST',
-    path: '/users',
+    path: '/user',
     handler: usersController.createUser,
     config: {
       description: 'Create a new user',
@@ -36,7 +34,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/users/{userId}',
+    path: '/user/{userId}',
     handler: usersController.getUserDetails,
     config: {
       description: 'Get user details',
@@ -51,7 +49,7 @@ module.exports = [
   },
   {
     method: 'PUT',
-    path: '/users/{userId}',
+    path: '/user/update/{userId}',
     handler: usersController.updateUser,
     config: {
       description: 'Update user details',
@@ -67,7 +65,7 @@ module.exports = [
   },
   {
     method: 'DELETE',
-    path: '/users/{userId}',
+    path: '/users/delete/{userId}',
     handler: usersController.deleteUser,
     config: {
       description: 'Delete user details',
