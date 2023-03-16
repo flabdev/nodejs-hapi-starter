@@ -51,7 +51,6 @@ npm run lint-check
 npm run lint
 ```
 
-
 #### SonarQube configuration
 
 - SonarQube configuration added with ES-LINT.
