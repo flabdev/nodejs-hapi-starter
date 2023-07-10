@@ -1,17 +1,10 @@
-const Joi = require('joi');
 const usersController = require('../controllers/userController');
-
-const userJoiSchema = Joi.object({
-  firstName: Joi.string().required(),
-  lastName: Joi.string().required(),
-  email: Joi.string().email().required(),
-  password: Joi.string().required(),
-}).unknown();
+const { userJoiSchema, checkUserId } = require('../utils/userValidate');
 
 module.exports = [
   {
     method: 'POST',
-    path: '/user',
+    path: '/api/v1/users',
     handler: usersController.createUser,
     config: {
       description: 'Create a new user',
@@ -24,7 +17,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/users',
+    path: '/api/v1/users',
     handler: usersController.getAllUsers,
     config: {
       description: 'Get all users',
@@ -34,47 +27,41 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/user/{userId}',
+    path: '/api/v1/users/{id}',
     handler: usersController.getUserDetails,
     config: {
       description: 'Get user details',
       tags: ['api', 'user'],
       auth: false,
       validate: {
-        params: Joi.object({
-          userId: Joi.string().required(),
-        }),
+        params: checkUserId,
       },
     },
   },
   {
     method: 'PUT',
-    path: '/user/update/{userId}',
+    path: '/api/v1/users/{id}',
     handler: usersController.updateUser,
     config: {
       description: 'Update user details',
       tags: ['api', 'user'],
       auth: false,
       validate: {
-        params: Joi.object({
-          userId: Joi.string().required(),
-        }),
+        params: checkUserId,
         payload: userJoiSchema,
       },
     },
   },
   {
     method: 'DELETE',
-    path: '/users/delete/{userId}',
+    path: '/api/v1/users/{id}',
     handler: usersController.deleteUser,
     config: {
       description: 'Delete user details',
       tags: ['api', 'user'],
       auth: false,
       validate: {
-        params: Joi.object({
-          userId: Joi.string().required(),
-        }),
+        params: checkUserId,
       },
     },
   },

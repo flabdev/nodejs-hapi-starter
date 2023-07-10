@@ -8,12 +8,9 @@ module.exports = {
   swagger: {
     contact: 'sai krishna thatipamula',
     title: 'Node.js seed project with Hapi.js framework',
+    contact: 'sai krishna thatipamula'
   },
-  database: {
-    uri: process.env.MONGODB_URI,
-  },
-  auth: {
-    jwtSecretKey: process.env.JWT_SECRET_KEY,
-    expiresIn: process.env.JWT_TOKEN_EXPIRES_IN,
+  Database: {
+    URI: process.env.MONGODB_URI,
   },
 };
