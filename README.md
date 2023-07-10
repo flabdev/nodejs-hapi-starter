@@ -30,7 +30,7 @@ The following prerequisites are required for the template to function properly:
 
 Clone the project to specified folder and import it into Your Favourite IDE
 
-    git clone https://github.com/flabdev/nodejs-express-starter.git
+    https://github.com/flabdev/nodejs-hapi-starter.git
 
 ## Building and running the application
 
