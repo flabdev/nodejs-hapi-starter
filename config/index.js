@@ -6,9 +6,9 @@ module.exports = {
     port: process.env.PORT,
   },
   swagger: {
-    contact: 'sai krishna thatipamula',
+    host: 'sai krishna thatipamula',
     title: 'Node.js seed project with Hapi.js framework',
-    contact: 'sai krishna thatipamula'
+    contact: 'sai krishna thatipamula',
   },
   Database: {
     URI: process.env.MONGODB_URI,

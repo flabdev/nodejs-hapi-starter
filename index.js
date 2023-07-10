@@ -1,4 +1,3 @@
-
 const hapi = require('@hapi/hapi');
 const inert = require('@hapi/inert');
 const vision = require('@hapi/vision');
@@ -18,7 +17,7 @@ mongoose.connect(config.Database.URI, {
 
 const db = mongoose.connection;
 
-  const init = async () => {
+const init = async () => {
   console.log('Initializing the configuration...');
   const server = hapi.server({
     host: config.server.host,
@@ -44,7 +43,8 @@ const db = mongoose.connection;
       },
     },
     grouping: 'tags',
-    schemes: process.env.HOST === 'localhost' ? ['http', 'https'] : ['https', 'http'],
+    schemes:
+      process.env.HOST === 'localhost' ? ['http', 'https'] : ['https', 'http'],
   };
 
   await server.register([
@@ -59,11 +59,13 @@ const db = mongoose.connection;
   try {
     await server.start();
     console.log(`Server running on ${server.info.uri}`);
-    console.log(`Swagger documentation is running on ${server.info.uri}/documentation`);
+    console.log(
+      `Swagger documentation is running on ${server.info.uri}/documentation`,
+    );
   } catch (err) {
     utils.writeErrorLog(Boom.badImplementation(err));
     console.log(err);
-  };
+  }
 
   server.route({
     method: 'GET',
@@ -75,15 +77,21 @@ const db = mongoose.connection;
 
   server.route(routes);
 
-  server.events.on('response', (request) => {
-    console.log(`${new Date().toISOString()} : ${request?.info?.remoteAddress} : ${request?.method?.toUpperCase()} : ${request?.path} : ${request?.response?.statusCode}`);
-   if(config.NODE_ENV === 'production') {
-    if (request?.response?._error) { 
-      utils.writeErrorLog(request?.response, request.info.id);
-    } else {
-      utils.writeResponseLog(request?.response, request.info.id);
+  server.events.on('response', request => {
+    console.log(
+      `${new Date().toISOString()} : ${
+        request?.info?.remoteAddress
+      } : ${request?.method?.toUpperCase()} : ${request?.path} : ${
+        request?.response?.statusCode
+      }`,
+    );
+    if (config.NODE_ENV === 'production') {
+      if (request?.response?._error) {
+        utils.writeErrorLog(request?.response, request.info.id);
+      } else {
+        utils.writeResponseLog(request?.response, request.info.id);
+      }
     }
-  }
   });
 };
 
@@ -92,22 +100,22 @@ db.on('connected', () => {
   init();
 });
 
-db.on('error', (err) => {
+db.on('error', err => {
   utils.writeErrorLog(Boom.badImplementation(err));
   console.log('Connection to DB failed', err);
   process.exit(0);
 });
 
 db.on('disconnected', () => {
-  const message = 'DB connection closed due to the network connectivity issues, or database server crashing';
+  const message =
+    'DB connection closed due to the network connectivity issues, or database server crashing';
   utils.writeErrorLog(Boom.badImplementation(message));
   console.log('Connection teminated to DB');
   process.exit(0);
 });
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', err => {
   utils.writeErrorLog(Boom.badImplementation(err));
   console.error('DB unhandled rejection', err);
   process.exit(1);
 });
-

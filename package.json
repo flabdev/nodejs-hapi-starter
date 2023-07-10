@@ -2,7 +2,7 @@
     "name": "node-hapi-seed",
     "version": "0.0.2",
     "description": "Node.js seed project",
-    "main": "server.js",
+    "main": "index.js",
     "scripts": {
         "test": "lab",
         "start": "node index.js",

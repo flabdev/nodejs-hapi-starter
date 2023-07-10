@@ -1,10 +1,11 @@
 const usersController = require('../controllers/userController');
 const { userJoiSchema, checkUserId } = require('../utils/userValidate');
 
+const users = '/api/v1/users';
 module.exports = [
   {
     method: 'POST',
-    path: '/api/v1/users',
+    path: `${users}`,
     handler: usersController.createUser,
     config: {
       description: 'Create a new user',
@@ -17,7 +18,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/api/v1/users',
+    path: `${users}`,
     handler: usersController.getAllUsers,
     config: {
       description: 'Get all users',
@@ -27,7 +28,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/api/v1/users/{id}',
+    path: `${users}/{id}`,
     handler: usersController.getUserDetails,
     config: {
       description: 'Get user details',
@@ -40,7 +41,7 @@ module.exports = [
   },
   {
     method: 'PUT',
-    path: '/api/v1/users/{id}',
+    path: `${users}/{id}`,
     handler: usersController.updateUser,
     config: {
       description: 'Update user details',
@@ -54,7 +55,7 @@ module.exports = [
   },
   {
     method: 'DELETE',
-    path: '/api/v1/users/{id}',
+    path: `${users}/{id}`,
     handler: usersController.deleteUser,
     config: {
       description: 'Delete user details',

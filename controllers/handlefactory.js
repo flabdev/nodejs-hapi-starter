@@ -63,6 +63,7 @@ exports.getOneWithPopulate = (Model, popOptions) => async req => {
     let query = Model.findById(req.params.id);
     if (popOptions) query = query.populate(popOptions);
     const doc = await query;
+    console.log(doc);
 
     if (!doc) {
       return Boom.notFound(NO_DOCUMENT);
