@@ -4,11 +4,12 @@ const vision = require('@hapi/vision');
 const hapiSwagger = require('hapi-swagger');
 const mongoose = require('mongoose');
 const Boom = require('@hapi/boom');
-
 const config = require('./config');
 const routes = require('./routes');
 const packageFile = require('./package.json');
 const utils = require('./utils/logger');
+const CustomError = require('./utils/appError');
+const errorHandler = require('./controllers/errorController');
 
 mongoose.connect(config.Database.URI, {
   useNewUrlParser: true,
@@ -75,7 +76,26 @@ const init = async () => {
     },
   });
 
+  server.ext('onPreResponse', (request, h) => {
+    const { response } = request;
+    if (response.isBoom) {
+      const error =
+        response instanceof CustomError
+          ? response
+          : new CustomError(response.message, response.output.statusCode);
+      return errorHandler(error);
+    }
+    return h.continue;
+  });
   server.route(routes);
+
+  server.route({
+    method: '*',
+    path: '/{any*}',
+    handler: request => {
+      throw new CustomError(`Can't find ${request.path} on this server`, 404);
+    },
+  });
 
   server.events.on('response', request => {
     console.log(
